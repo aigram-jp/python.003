@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  python:
+    image: blog-python:0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+        bash -c "
+            cd /var/www/scripts
+            python ./prog.py
+        "
+    container_name: blog-python
+    volumes:
+      - ./scripts:/var/www/scripts:rw
+    networks:
+      - main-net
+
+networks:
+  main-net:
+    name: main-net
+    driver: bridge
+
+    
